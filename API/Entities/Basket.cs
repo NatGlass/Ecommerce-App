@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.Entities
 {
     public class Basket
@@ -20,13 +15,16 @@ namespace API.Entities
 
             // if the item is already in the basket, update the quantity
             var existingItem = Items.FirstOrDefault(item => item.Product.Id == product.Id);
+            
             if (existingItem!= null) existingItem.Quantity += quantity;
         }
         public void RemoveItem(int productId, int quantity)
         // get the item to remove
         {
             var item = Items.FirstOrDefault(item => item.Product.Id == productId);
+
             if (item == null) return;
+
             item.Quantity -= quantity;
             // if the item quantity is zero, remove it
             if (item.Quantity == 0) Items.Remove(item);
