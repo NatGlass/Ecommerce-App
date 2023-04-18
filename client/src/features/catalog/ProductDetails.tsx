@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { Product } from '../../app/types/product'
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
 import agent from '../../app/api/agent'
+import NotFound from '../../app/errors/NotFound'
+import Loading from '../../app/layout/Loading'
 
 type Props = {}
 
@@ -20,11 +22,11 @@ const ProductDetails = (props: Props) => {
   }, [id])
 
   if (loading) {
-    return <h3>Loading...</h3>
+    return <Loading />
   }
 
   if (!product) {
-    return <h3>Product not found</h3>
+    return <NotFound/>
   }
 
   return (
