@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Product } from '../../app/types/product'
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
+import agent from '../../app/api/agent'
 
 type Props = {}
 
@@ -12,8 +13,8 @@ const ProductDetails = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`)
-    .then(response => setProduct(response.data))
+    id && agent.Catalog.details(parseInt(id))
+    .then(response => setProduct(response))
     .catch(error => console.log(error))
     .finally(() => setLoading(false))
   }, [id])
